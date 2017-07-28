@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
-  expose :comments, ->{ Comment.all }
-  expose :comment
+  expose(:movie)
+  expose(:movie_comments) { movie.comments }
+  expose(:comments) { Comment.all }
+  expose(:comment)
 
   def create
     if comment.save
