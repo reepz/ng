@@ -7,10 +7,11 @@ class CommentsController < ApplicationController
   expose(:comments) { Comment.all }
   expose(:comment)
   expose(:user_comment) { Comment.where(id: current_user.id)}
-  
+
   def create
     comment.movie_id = movie.id
     comment.user_id = current_user.id
+
     if comment.save
       redirect_to movie_path(movie), notice: 'Comment was successfully created.'
     else
