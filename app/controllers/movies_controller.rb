@@ -1,8 +1,11 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:send_info]
 
+  expose(:comment) { Comment.new }
   expose_decorated(:movies) { Movie.all }
+
   expose(:movie)
+  expose(:movie_comments) { Comment.where(movie_id: movie.id).order('created_at DESC')}
 
   def send_info
     MovieInfoMailer.send_info(current_user, movie).deliver_now

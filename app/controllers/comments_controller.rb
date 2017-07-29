@@ -1,12 +1,18 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+
   expose(:movie)
   expose(:movie_comments) { movie.comments }
+
   expose(:comments) { Comment.all }
   expose(:comment)
-
+  expose(:user_comment) { Comment.where(id: current_user.id)}
+  
   def create
+    comment.movie_id = movie.id
+    comment.user_id = current_user.id
     if comment.save
-      redirect_to comment, notice: 'Comment was successfully created.'
+      redirect_to movie_path(movie), notice: 'Comment was successfully created.'
     else
       render :new
     end
@@ -14,7 +20,7 @@ class CommentsController < ApplicationController
 
   def update
     if comment.update(comment_params)
-      redirect_to comment, notice: 'Comment was successfully updated.'
+      redirect_to movie_path(movie), notice: 'Comment was successfully updated.'
     else
       render :edit
     end
@@ -22,7 +28,7 @@ class CommentsController < ApplicationController
 
   def destroy
     comment.destroy
-    redirect_to comments_url, notice: 'Comment was successfully destroyed.'
+    redirect_to movie_url(movie), notice: 'Comment was successfully destroyed.'
   end
 
   private
