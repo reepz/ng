@@ -12,5 +12,4 @@
   - if user_signed_in? && current_user.id == comment.user_id
     = link_to "Delete", movie_comment_path(movie, comment), method: :delete, data: {confirm: "Delete this comment?"}
     = link_to "Edit", edit_movie_comment_path(movie, comment)
-    = link_to "Show", movie_comment_path(movie, comment)
   %hr
