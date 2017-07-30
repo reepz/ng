@@ -13,6 +13,8 @@
 #
 
 class Movie < ApplicationRecord
+
+  scope :top_commenters, -> { Comment.joins(:user).group(:user_id).count }
   belongs_to :genre
   has_many :comments
   validates_with TitleBracketsValidator

@@ -15,8 +15,12 @@ Rails.application.routes.draw do
       get :export
     end
   end
+
+  resources :comments, only: :index
+
   resources :movies do
     resources :comments
   end
+
 
 end

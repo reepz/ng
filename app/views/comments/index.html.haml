@@ -1,25 +1,15 @@
-%h1 Listing comments
-
-%table
-  %thead
-    %tr
-      %th Body
-      %th User
-      %th Movie
-      %th
-      %th
-      %th
-
-  %tbody
-    - comments.each do |comment|
-      %tr
-        %td= comment.body
-        %td= comment.user_id
-        %td= comment.movie_id
-        %td= link_to 'Show', movie_comment
-        %td= link_to 'Edit', edit_comment_path(comment)
-        %td= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Comment', new_comment_path
+.row
+  .col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+    %h1.text-center Most active users:
+    %table.table.table-striped
+      %thead
+        %tr
+          %th #
+          %th Name
+          %th Number of comments
+      %tbody
+        - @top_commenters.each_with_index do |(user, comments_count), index|
+          %tr
+            %td= index + 1
+            %td= user
+            %td= comments_count

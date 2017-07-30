@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :index
 
   expose(:movie)
   expose(:movie_comments) { movie.comments }
@@ -8,6 +8,11 @@ class CommentsController < ApplicationController
   expose(:comment)
   expose(:user_comment) { Comment.where(id: current_user.id)}
 
+  # couldnt figure how to access model scope with decent_exposure
+  def index
+    @top_commenters = Comment.top_commenters
+  end
+
   def create
     comment.movie_id = movie.id
     comment.user_id = current_user.id
@@ -15,7 +20,7 @@ class CommentsController < ApplicationController
     if comment.save
       redirect_to movie_path(movie), notice: 'Comment was successfully created.'
     else
-      render :new
+      redirect_to movie_path(movie), alert: 'You have already commented on this movie. Remove existing comment to add a new one.'
     end
   end
 
@@ -31,6 +36,8 @@ class CommentsController < ApplicationController
     comment.destroy
     redirect_to movie_url(movie), notice: 'Comment was successfully destroyed.'
   end
+
+
 
   private
 

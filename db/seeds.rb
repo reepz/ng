@@ -82,3 +82,9 @@ if Movie.count < 100
     )
   end
 end
+
+
+15.times do |i|
+  number = i.zero? ? "" : i + 1
+  Comment.create(body: "wake up, asjhdaskjdhaskjdhaskjdh shakeup!", user_id: i)
+end

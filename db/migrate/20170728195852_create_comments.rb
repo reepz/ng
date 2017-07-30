@@ -7,7 +7,8 @@ class CreateComments < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :comments, :user_id
-    add_index :comments, :movie_id
+    add_index :comments, [:movie_id, :user_id], unique: true
+    # add_index :comments, :user_id
+    # add_index :comments, :movie_id
   end
 end

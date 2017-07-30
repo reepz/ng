@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
   expose(:movie)
   expose(:movie_comments) { Comment.where(movie_id: movie.id).order('created_at DESC')}
 
+
   def send_info
     MovieInfoMailer.send_info(current_user, movie).deliver_now
     redirect_to :back, notice: "Email sent with movie info"

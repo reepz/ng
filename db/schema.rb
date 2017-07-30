@@ -18,8 +18,7 @@ ActiveRecord::Schema.define(version: 20170728195852) do
     t.integer "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_comments_on_movie_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["movie_id", "user_id"], name: "index_comments_on_movie_id_and_user_id", unique: true
   end
 
   create_table "genres", force: :cascade do |t|
