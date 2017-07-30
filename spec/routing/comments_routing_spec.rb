@@ -8,31 +8,31 @@ RSpec.describe CommentsController, type: :routing do
     end
 
     it "routes to #new" do
-      expect(:get => "/movies/1/comments/new").to route_to("comments#new", :id => "1")
+      expect(:get => "/movies/1/comments/new").to route_to("comments#new", :movie_id => "1")
     end
 
     it "routes to #show" do
-      expect(:get => "/comments/1").to route_to("comments#show", :id => "1")
+      expect(:get => "/movies/1/comments/1").to route_to("comments#show", :movie_id => "1", id: '1')
     end
 
     it "routes to #edit" do
-      expect(:get => "/comments/1/edit").to route_to("comments#edit", :id => "1")
+      expect(:get => "/movies/1/comments/1/edit").to route_to("comments#edit", :movie_id => "1", id: '1')
     end
 
     it "routes to #create" do
-      expect(:post => "/comments").to route_to("comments#create")
+      expect(:post => "/movies/1/comments").to route_to("comments#create", movie_id: '1')
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/comments/1").to route_to("comments#update", :id => "1")
+      expect(:put => "/movies/1/comments/1").to route_to("comments#update", :id => "1", movie_id: '1')
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/comments/1").to route_to("comments#update", :id => "1")
+      expect(:patch => "/movies/1/comments/1").to route_to("comments#update", :id => "1", movie_id: '1')
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/comments/1").to route_to("comments#destroy", :id => "1")
+      expect(:delete => "/movies/1/comments/1").to route_to("comments#destroy", :id => "1", movie_id: '1')
     end
 
   end

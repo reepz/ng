@@ -7,11 +7,7 @@ class CommentsController < ApplicationController
   expose(:comments) { Comment.all }
   expose(:comment)
   expose(:user_comment) { Comment.where(id: current_user.id)}
-
-  # couldnt figure how to access model scope with decent_exposure
-  def index
-    @top_commenters = Comment.top_commenters
-  end
+  expose(:top_commenters) { Comment.top_commenters }
 
   def create
     comment.movie_id = movie.id
@@ -20,7 +16,8 @@ class CommentsController < ApplicationController
     if comment.save
       redirect_to movie_path(movie), notice: 'Comment was successfully created.'
     else
-      redirect_to movie_path(movie), alert: 'You have already commented on this movie. Remove existing comment to add a new one.'
+      #refactor
+      redirect_to movie_path(movie), alert: 'Comment too short, too long or already commented.'
     end
   end
 

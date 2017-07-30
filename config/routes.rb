@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get "movies"
     end
   end
+
   resources :movies, only: [:index, :show] do
     member do
       get :send_info
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
   resources :comments, only: :index
 
   resources :movies do
-    resources :comments
+    resources :comments, except: :index
   end
 
 

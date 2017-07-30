@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+#didnt figure out how to adjust this for methods from decent exposure
+
 # RSpec.describe "comments/show", type: :view do
 #   before(:each) do
 #     @comment = assign(:comment, Comment.create!(

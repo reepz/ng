@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+#didnt figure out how to adjust this for methods from decent exposure
 # RSpec.describe "comments/index", type: :view do
 #   before(:each) do
 #     assign(:comments, [
